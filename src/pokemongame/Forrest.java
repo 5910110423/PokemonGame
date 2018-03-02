@@ -1,86 +1,79 @@
-package pokemongame;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
-import java.util.Random; 
+package pokemongames;
+import java.util.Random;
 import java.util.Scanner;
 
+/**
+ *
+ * @author Core I7
+ */
 public class Forrest {
-    private Scanner sc = new Scanner(System.in);
-    private Bag  Bag;
-    Random rand = new Random(); 
-    
+    private Bag bag;
+    Random rand = new Random();
+    private Scanner scanner = new Scanner(System.in);
     public void find(){
         
-        String name[] = {"Eevee","Snorlax","Bullbasaul"};
-        String type = name[rand.nextInt(3)];
-        System.out.println("Pokemon is "+ type);
-        
-        catchMon(type);
-        
-        
+            
+            String name[] = {"Eevee","Snorlax","Pikaju"};
+            String type = name[rand.nextInt(3)];
+            System.out.println("Pokemon" + type);
+            catchPokemon(type);
+            
+            
     }
+public void catchPokemon(String type){
+       int mood = rand.nextInt(10)+1;
+       int ball = select();
+       int result;
+       if(ball == 1){result = mood*8;}
+       else if(ball == 2){result = mood*9;}
+       else {result = mood*10;}
+       
+       if(result >=50){
+           System.out.println("Success");
+           bag = new Bag();
+           addPokemon(type);
+           
+       }
+       else {
+           System.out.println("Fail");
+           
+       }
     
-    private void catchMon(String type){
-        
-        int mood = rand.nextInt(10)+1;
-        int ball = selectBall();
-        int result = 0;
-        if(ball==1){
-            result = mood*8;
-        }
-        else if(ball==2){
-            result = mood*9; 
-        }
-        else if(ball==3){
-            result = mood*10; 
-        }
-        
-        if(result >= 50){
-            System.out.println("Success");
-             Bag Bag = new Bag();
-             addPokemon(type);
-             
-        }else{
-            System.out.println("Fail");
-        }
-        
-        
-    }
-    
-    private int selectBall(){
-        System.out.println("\nSelect Ball:");
-        System.out.println("Type 1 is Pokeball");
-        System.out.println("Type 2 is Masterball");
-        System.out.println("Type 3 is Ultraball");
-        int ball = sc.nextInt();
-        return ball;
-    }
-    
-    	private void addPokemon(String type){
-                //sc.nextLine();
-                System.out.print("name :");
-		String name = sc.next();
-                System.out.print("weight :");
-		float weight = sc.nextFloat();
-                System.out.print("step length :");
-		float stepLength = sc.nextFloat();
+}
+public int select(){
+            System.out.println("Type of poke ball 1=PokeBall / 2=GreatBall / 3=UltraBall");
+            int ball = scanner.nextInt();
+            return ball;
+}
+private void addPokemon(String type){
+		scanner.nextLine();
+		// input name weight length
+		
+                System.out.print("Name: ");
+		String name = scanner.next();
+                System.out.print("Weight: ");
+		float weight = scanner.nextFloat();
+                System.out.print("StepLength: ");
+		float stepLength = scanner.nextFloat();
                 
-
-            switch(type){
-                case "Eevee":
-                    Eevee eevee = new Eevee(name, weight, stepLength);
-                    Bag.addPokemon(eevee);
-                    break;
-                case "Snorlax":
-                    Snorlax Snor = new Snorlax(name, weight, stepLength);
-                    Bag.addPokemon(Snor);
-                    break;
-                case "Bulbasaul": 
-                    Bulbasaul bul = new Bulbasaul(name, weight, stepLength);
-                    Bag.addPokemon(bul);
-                    break;
-                default:
-                    break;
-            }
+		if(type.equals("Eevee")){
+			Eevee eevee = new Eevee(name, weight, stepLength);
+			bag.addPokemon(eevee);
+		}
+                else if(type.equals("Snorlax")){
+			Snorlax snorlax = new Snorlax(name, weight, stepLength);
+			bag.addPokemon(snorlax);
+                }   
+                else if(type.equals("Pikaju")){
+			Pikaju pikaju = new Pikaju(name, weight, stepLength);
+			bag.addPokemon(pikaju);
+                }
 
 	}
     

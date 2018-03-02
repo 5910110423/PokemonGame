@@ -1,17 +1,23 @@
-package pokemongame;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package pokemongames;
+
+import java.util.Scanner;
 
 /**
  *
- * @author NICK
+ * @author Core I7
  */
-import java.util.*;
-import java.io.*;
-
-class CommandParser{
-	private PokemonFarm pokemonFarm;
-        private Forrest forrest = new Forrest();
+public class CommandParser {
+        private PokemonFarm pokemonFarm;
 	private Scanner commandScanner;
 	private boolean isRunning;
+        private Forrest forrest = new Forrest();
+        private Bag bag;
+        
 
 	public CommandParser(PokemonFarm pokemonFarm){
 		this.pokemonFarm = pokemonFarm;
@@ -38,44 +44,43 @@ class CommandParser{
 				this.listPokemons();
 			else if(command.equals("feed"))
 				this.feedPokemons();
-                        else if(command.equals("exercise"))
-                                this.exercisePokemons();
-                        else if(command.equals("remove"))
+                        else if (command.equals("remove"))
                                 this.removePokemon();
-                        else if(command.equals("find"))
-                                this.catchPokemon();
+                        else if(command.equals("walk"))
+                                this.walkPokemons();
+                        else if(command.equals("exercise"))
+				this.exercisePokemons();
+                        else if(command.equals("catch"))
+				this.CatchPokemon();
+                        
 		}
 
 	}
 
 	private void addPokemon(){
-		//commandScanner.nextLine();
+		commandScanner.nextLine();
 		// input name weight length
-                System.out.print("Pokemon :");
+		System.out.print("PokemonType: ");
 		String pokemonType = commandScanner.next();
-                System.out.print("name :");
+                System.out.print("Name: ");
 		String name = commandScanner.next();
-                System.out.print("weight :");
+                System.out.print("Weight: ");
 		float weight = commandScanner.nextFloat();
-                System.out.print("step length :");
+                System.out.print("StepLength: ");
 		float stepLength = commandScanner.nextFloat();
-
-            switch(pokemonType){
-                case "Eevee":
-                    Eevee eevee = new Eevee(name, weight, stepLength);
-                    pokemonFarm.addPokemon(eevee);
-                    break;
-                case "Snorlax":
-                    Snorlax Snor = new Snorlax(name, weight, stepLength);
-                    pokemonFarm.addPokemon(Snor);
-                    break;
-                case "Bulbasaul": 
-                    Bulbasaul bul = new Bulbasaul(name, weight, stepLength);
-                    pokemonFarm.addPokemon(bul);
-                    break;
-                default:
-                    break;
-            }
+                
+		if(pokemonType.equals("Eevee")){
+			Eevee eevee = new Eevee(name, weight, stepLength);
+			pokemonFarm.addPokemon(eevee);
+		}
+                else if(pokemonType.equals("Snorlax")){
+			Snorlax snorlax = new Snorlax(name, weight, stepLength);
+			pokemonFarm.addPokemon(snorlax);
+                }   
+                else if(pokemonType.equals("Pikaju")){
+			Pikaju pikaju = new Pikaju(name, weight, stepLength);
+			pokemonFarm.addPokemon(pikaju);
+                }
 
 	}
 
@@ -92,43 +97,58 @@ class CommandParser{
 		String name = this.commandScanner.next();
 		if(name.equals("all")){
 			this.pokemonFarm.feed("all");
-		} else {
-                    this.pokemonFarm.feed(name);
+		}
+                else{
+                        this.pokemonFarm.feed(name);
                 }
-	} 
-        
-        private void removePokemon(){
-            System.out.print("what index do you want to remove");
-            int indedx = commandScanner.nextInt();
+                
+	}
+        private void walkPokemons(){
+            
+                
+                System.out.print("Which pokemon do you want to walk? ");
+		String name = this.commandScanner.next();
+		if(name.equals("all")){
+			this.pokemonFarm.walk("all");
+		}
+                else{
+                        this.pokemonFarm.walk(name);
+                }
         }
-        
+        private void removePokemon(){
+                System.out.print("index : ");
+                int index = commandScanner.nextInt();
+                pokemonFarm.removePokemon(index);
+        } 
         private void exercisePokemons(){
-		System.out.print("Which pokemon do you want to feed? ");
+            System.out.print("Which pokemon do you want to exercise? ");
 		String name = this.commandScanner.next();
 		if(name.equals("all")){
 			this.pokemonFarm.exercise("all");
-		} else {
-                    this.pokemonFarm.exercise(name);
+		}
+                else{
+                        this.pokemonFarm.exercise(name);
                 }
-	} 
-        
-        private void catchPokemon(){
-            
-            //Forrest forrest = new Forrest();
-            int i=1;
-            while(i==1){
-                
-                System.out.print("What do you want? find or quit: ");
-                String ans= this.commandScanner.next();
-                if(ans.equals("find")){
-                    this.forrest.find();
-                }
-                else if(ans.equals("quit")){
-                    i=0;
-                }
-            }
-            
         }
+        private void CatchPokemon(){
+                int i=1;
+                while(i==1){
+                System.out.print("Which do you want? (catch  or quit) ) ");
+                String want = this.commandScanner.next();
+                    if(want.equals("catch")){
+			
+                        this.forrest.find();
+                    }
+                    else if(want.equals("quit")){
+                        this.bag = new Bag();
+                        bag.addToFarm();
+                        
+                        
+                        i = 0;
+                    }
+                }
+                
+        } 
+        
+
 }
-
-

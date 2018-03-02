@@ -3,18 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pokemongame;
+package pokemongames;
 
 /**
  *
- * @author NICK
+ * @author Core I7
  */
-
-import java.util.*;
-
-class Pokemon{
-	private String name;
-	private float weight;
+public class Pokemon {
+        private String name;
+    private float weight;
 	private float stepLength;
 	private int step;
 	private float gainingWeightStep;
@@ -36,20 +33,15 @@ class Pokemon{
 		else
 			this.types = types;
 	}
-        public String getName(){
-            return name;
-        }
+        public Pokemon(){
+	}
+
 	public void walk(){
 		step += 1;
 	}
 
 	public void eat(){
 		weight += gainingWeightStep;
-	}
-        
-        public void exercise(){
-		weight -= gainingWeightStep;
-                this.walk();
 	}
 
 	public void print(){
@@ -64,6 +56,11 @@ class Pokemon{
 		System.out.println("  Today Step: " + step);
 		System.out.println("------------------------------------------");
 	}
-
+        public void exercise(){
+                weight -= gainingWeightStep;
+                this.walk();
+        }
+        public String getName() {
+                return name;
+        }
 }
-

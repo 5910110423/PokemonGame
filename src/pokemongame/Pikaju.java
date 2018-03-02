@@ -9,8 +9,8 @@ package pokemongames;
  *
  * @author Core I7
  */
-public class Snorlax extends Pokemon {
-    public Snorlax (String name, float weight, float stepLength){
+public class Pikaju extends Pokemon {
+    public Pikaju (String name, float weight, float stepLength){
 		super(name, weight, stepLength, 1f, new String[] {"normal"});
 	}
 }
